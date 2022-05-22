@@ -7,7 +7,7 @@ using Hafta1EmrullahYilmazOdev.Model;
 
 namespace Hafta1EmrullahYilmazOdev.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]s")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace Hafta1EmrullahYilmazOdev.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-
+            
             return Ok(products); //http 200
 
         }
@@ -87,13 +87,39 @@ namespace Hafta1EmrullahYilmazOdev.Controllers
 
             return Ok(product);  //http 200
         }
-        [HttpPatch("Id")]
-        public IActionResult Patch(int Id, [FromBody] Product product)
+        [HttpPatch]
+        public IActionResult Patch([FromQuery] string select, int id ,string updater)
         {
-            Product productpatch = products.Find(f => f.Id == Id);
+            //Product productToUpdate = products.Find(f => f.Id == id);
+            switch (select)
+            {
+                case "Name":
+                    Product productToUpdate = products.SingleOrDefault(g => g.Id == id);
+                    int index = products.IndexOf(productToUpdate);
+                    products[index].Name = updater;
+                    return Ok();//http 200
+                case "Id":
+                    var ss = products.SingleOrDefault(g => g.Id == id);
+                    int indexx = products.IndexOf(ss);
+                    products[indexx].Id = Convert.ToInt32(updater);
+                    return Ok();//http 200
+                case "Price":
+                    var sss = products.SingleOrDefault(g => g.Id == id);
+                    int indexxx = products.IndexOf(sss);
+                    products[indexxx].Price = Convert.ToInt32(updater);
+                    
+                    return Ok();//http 200
+
+                default:
+                    return NotFound();//http 404
+            }
+
+            //return Ok(products);  //http 204 
+            //Product productpatch = products.Find(f => f.Id == product.Id);
             //int index = products.IndexOf(productpatch);
-            products.SingleOrDefault(g => g.Id == Id);
-            return Ok(product);  //http 204 
+            //products[index].Id = product.Id;
+            //products.SingleOrDefault(g => g.Id == Id);
+            return Ok();  //http 204 
         }
 
         [HttpDelete("Id")]
