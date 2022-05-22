@@ -93,7 +93,7 @@ namespace Hafta1EmrullahYilmazOdev.Controllers
             Product productpatch = products.Find(f => f.Id == Id);
             //int index = products.IndexOf(productpatch);
             products.SingleOrDefault(g => g.Id == Id);
-            return NoContent();  //http 204 
+            return Ok(product);  //http 204 
         }
 
         [HttpDelete("Id")]
