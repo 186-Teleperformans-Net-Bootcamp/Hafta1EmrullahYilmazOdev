@@ -99,16 +99,18 @@ namespace Hafta1EmrullahYilmazOdev.Controllers
                     products[index].Name = updater;
                     return Ok(productToUpdate);//http 200
                 case "Id":
+                    Product productToUpdatee = products.SingleOrDefault(g => g.Id == id);
                     var ss = products.SingleOrDefault(g => g.Id == id);
                     int indexx = products.IndexOf(ss);
                     products[indexx].Id = Convert.ToInt32(updater);
-                    return Ok();//http 200
+                    return Ok(productToUpdatee);//http 200
                 case "Price":
+                    Product productToUpdateee = products.SingleOrDefault(g => g.Id == id);
                     var sss = products.SingleOrDefault(g => g.Id == id);
                     int indexxx = products.IndexOf(sss);
                     products[indexxx].Price = Convert.ToInt32(updater);
                     
-                    return Ok();//http 200
+                    return Ok(productToUpdateee);//http 200
 
                 default:
                     return NotFound();//http 404
