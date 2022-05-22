@@ -97,7 +97,7 @@ namespace Hafta1EmrullahYilmazOdev.Controllers
                     Product productToUpdate = products.SingleOrDefault(g => g.Id == id);
                     int index = products.IndexOf(productToUpdate);
                     products[index].Name = updater;
-                    return Ok();//http 200
+                    return Ok(productToUpdate);//http 200
                 case "Id":
                     var ss = products.SingleOrDefault(g => g.Id == id);
                     int indexx = products.IndexOf(ss);
